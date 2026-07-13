@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Explore Crops | AgriLink</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <style>
+    .hero { background: linear-gradient(rgba(0,60,0,0.35), rgba(0,60,0,0.35)), url('/images/green-farm.jpg') center/cover no-repeat; color:#fff; min-height: 60vh; display:flex; align-items:center; justify-content:center; text-align:center; }
+    .hero .content { max-width: 900px; }
+    .section { padding: 50px 20px; text-align:center; }
+    .features { display:grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap:18px; margin-top:20px; }
+    .card { background:#fff; border-radius:12px; padding:18px; box-shadow:0 4px 12px rgba(0,0,0,0.1); text-align:left; }
+    .card h3 { color:#2e7d32; margin-bottom:8px; }
+    .card p { color:#2e7d32; }
+    .steps { display:grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap:18px; margin-top:20px; }
+    .cta { margin-top:24px; display:flex; gap:16px; justify-content:center; flex-wrap:wrap; }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo">🌾 AgriLink</div>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/buyer/available-crops">Browse Crops</a>
+      <a href="/buyer/register">Join</a>
+      <a href="/buyer/login">Login</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="content">
+      <h1>Discover Fresh Produce From Verified Farmers</h1>
+      <p>Transparent pricing, secure orders, and direct sourcing that supports local agriculture.</p>
+      <div class="cta">
+        <a href="/buyer/available-crops" class="btn primary">Explore Available Crops</a>
+        <a href="/buyer/register" class="btn secondary">Join as Buyer</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Why AgriLink Works For Buyers</h2>
+    <div class="features">
+      <div class="card">
+        <h3>Verified Sellers</h3>
+        <p>Buy from registered farmers with clear profiles and crop details.</p>
+      </div>
+      <div class="card">
+        <h3>Transparent Pricing</h3>
+        <p>See price per kg, available quantity, and location before you buy.</p>
+      </div>
+      <div class="card">
+        <h3>Secure Ordering</h3>
+        <p>Place orders through the portal and track purchases in one place.</p>
+      </div>
+      <div class="card">
+        <h3>Local Sourcing</h3>
+        <p>Support nearby farmers and reduce supply chain middlemen.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background:#e8f5e9;">
+    <h2>How Buying Works</h2>
+    <div class="steps">
+      <div class="card">
+        <h3>1. Explore</h3>
+        <p>Browse crops with images, descriptions, price, and quantity.</p>
+      </div>
+      <div class="card">
+        <h3>2. Select</h3>
+        <p>Open a crop, enter your required quantity, and review total.</p>
+      </div>
+      <div class="card">
+        <h3>3. Confirm</h3>
+        <p>Confirm the purchase and receive an order record instantly.</p>
+      </div>
+      <div class="card">
+        <h3>4. Track</h3>
+        <p>View all your orders anytime under the buyer dashboard.</p>
+      </div>
+    </div>
+    <div class="cta">
+      <a href="/buyer/available-crops" class="btn primary">Start Exploring</a>
+      <a href="/buyer/login" class="btn secondary">Go to Buyer Login</a>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 AgriLink | Empowering smarter agricultural trade
+  </footer>
+</body>
+</html>

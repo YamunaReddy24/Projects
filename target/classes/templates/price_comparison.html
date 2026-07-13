@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Crop Price Comparison - AgriLink</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+</head>
+<body style="background-color: #eaf7ea;">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">📊 Market Price Analytics</a>
+            <div class="d-flex gap-2">
+                <a href="/market/dashboard" class="btn btn-light">Dashboard</a>
+                <a href="/market/comparison" class="btn btn-light">Price Comparison</a>
+                <a href="/" class="btn btn-outline-light">Home</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h1 class="text-center mb-4 text-success">Crop Price Comparison</h1>
+        
+        <div th:if="${comparisonList == null or #lists.isEmpty(comparisonList)}" class="text-center alert alert-info">
+            No crops available for comparison yet! Please add some crops first.
+        </div>
+        <div th:unless="${comparisonList == null or #lists.isEmpty(comparisonList)}" class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead class="table-success">
+                    <tr>
+                        <th>Crop Name</th>
+                        <th>Farmer Price (per quintal)</th>
+                        <th>Market Price (per quintal)</th>
+                        <th>Difference (per quintal)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="item : ${comparisonList}">
+                        <td th:text="${item.cropName}"></td>
+                        <td th:text="'₹ ' + ${item.farmerPrice}"></td>
+                        <td th:text="'₹ ' + ${item.marketPrice}"></td>
+                        <td th:text="${item.difference > 0 ? '+' + item.difference : item.difference}"
+                            th:class="${item.difference > 0 ? 'text-success fw-bold' : 'text-danger fw-bold'}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

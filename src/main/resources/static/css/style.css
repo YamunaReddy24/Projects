@@ -1,0 +1,336 @@
+/* AgriLink single-page CSS - green professional theme */
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,system-ui,Arial,sans-serif;color:#16321f}
+
+/* NAVBAR */
+.navbar{position:fixed;top:0;left:0;right:0;height:64px;background:rgba(45,122,50,0.95);display:flex;align-items:center;justify-content:space-between;padding:0 28px;z-index:1000}
+.navbar .logo{color:#fff;font-weight:700;font-size:20px}
+.navbar nav ul{list-style:none;display:flex;gap:20px}
+.navbar nav a{color:#fff;text-decoration:none;font-weight:600}
+
+/* SECTION BASE */
+.section{height:100vh;display:flex;align-items:center;justify-content:center;position:relative;text-align:center;color:#fff;padding:20px}
+.section .overlay{position:absolute;inset:0;background:linear-gradient(rgba(6,50,6,0.35),rgba(6,50,6,0.35));}
+.overlay-light{background:linear-gradient(rgba(255,255,255,0.6),rgba(255,255,255,0.6))}
+.section .content{position:relative;z-index:2;max-width:900px}
+
+/* HERO */
+.hero{background:url('/images/imagesgreen-farm.jpg') center/cover no-repeat fixed}
+.hero h1{font-size:42px;margin-bottom:12px}
+.hero .tag{font-size:18px;margin-bottom:18px}
+.cta{display:inline-block;background:#fff;color:#1f3a20;padding:12px 26px;border-radius:30px;text-decoration:none;font-weight:700}
+
+/* CROPS */
+.crops{background:url('/images/fields.jpg') center/cover no-repeat fixed}
+.crops h2{font-size:36px;margin-bottom:12px}
+
+/* JOIN */
+.join{background:url('/images/tractor.jpg') center/cover no-repeat fixed}
+.join h2{font-size:34px;margin-bottom:10px}
+.portal-buttons{display:flex;gap:20px;justify-content:center;margin-top:18px}
+.btn{padding:12px 22px;border-radius:28px;text-decoration:none;color:#fff;font-weight:700}
+.btn.farmer{background:#4CAF50}
+.btn.buyer{background:#2e8b57}
+
+/* LOGIN */
+.login{background:url('/images/green-farm.jpg') center/cover no-repeat}
+
+/* FOOTER */
+footer{background:#214a26;color:#fff;padding:12px;text-align:center}
+
+/* Responsive */
+@media(max-width:768px){
+  .navbar nav ul{gap:12px}
+  .hero h1{font-size:28px}
+  .crops h2{font-size:26px}
+  .portal-buttons{flex-direction:column}
+}
+
+/* 🌿 AgriLink Professional Theme */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background-color: #f6fff8;
+  color: #1b5e20;
+  scroll-behavior: smooth;
+}
+
+/* Navbar */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: #2e7d32;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  z-index: 100;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+.navbar .logo {
+  font-weight: 700;
+  font-size: 22px;
+}
+
+.navbar nav a {
+  color: white;
+  text-decoration: none;
+  margin: 0 15px;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.navbar nav a:hover {
+  text-decoration: underline;
+}
+
+/* Section Base */
+.section {
+  min-height: 100vh;
+  text-align: center;
+  padding: 100px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.section .content {
+  max-width: 800px;
+  z-index: 2;
+}
+
+.section h2 {
+  font-size: 32px;
+  margin-bottom: 15px;
+  color: #1b5e20;
+}
+
+.section p {
+  font-size: 18px;
+  color: #2e7d32;
+  margin-bottom: 20px;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 12px 28px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.btn.primary {
+  background: #43a047;
+  color: white;
+}
+
+.btn.secondary {
+  background: #66bb6a;
+  color: white;
+}
+
+.btn.primary:hover,
+.btn.secondary:hover {
+  opacity: 0.85;
+}
+
+.btn.farmer {
+  background: #4caf50;
+  color: white;
+}
+
+.btn.buyer {
+  background: #2e7d32;
+  color: white;
+}
+
+.btn.expert {
+  background: linear-gradient(135deg, #1b5e20, #0d3d0f);
+  color: white;
+}
+
+.portal-buttons {
+  margin-top: 15px;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Hero Section */
+.hero {
+  background: linear-gradient(rgba(0, 60, 0, 0.4), rgba(0, 60, 0, 0.4)), url('/images/green-farm.jpg') center/cover no-repeat;
+  color: white;
+}
+
+.hero h1 {
+  font-size: 40px;
+  margin-bottom: 15px;
+}
+
+.hero p {
+  font-size: 20px;
+}
+
+/* Browse Crops Section */
+.crops {
+  background: #e8f5e9;
+}
+
+/* Join Section */
+.join {
+  background: #c8e6c9;
+}
+
+/* Login Section */
+.login {
+  background: linear-gradient(rgba(0, 70, 0, 0.5), rgba(0, 70, 0, 0.5)), url('/images/tractor-field.jpg') center/cover no-repeat;
+  color: white;
+}
+
+/* Footer */
+footer {
+  background: #2e7d32;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  font-size: 15px;
+}
+.join-section {
+  background-color: #a8bfa3;
+  text-align: center;
+  padding: 80px 20px;
+  color: white;
+}
+
+.join-section h2 {
+  font-size: 2em;
+  margin-bottom: 10px;
+}
+
+.join-section p {
+  font-size: 1.1em;
+  margin-bottom: 30px;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 12px 28px;
+  border-radius: 30px;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s ease;
+}
+
+.btn-farmer {
+  background: linear-gradient(to right, #5cb85c, #4cae4c);
+}
+
+.btn-buyer {
+  background: linear-gradient(to right, #4cae4c, #3d8b3d);
+}
+
+.btn:hover {
+  transform: scale(1.05);
+}
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #f6fff6;
+  margin: 0;
+  color: #333;
+}
+
+header {
+  background: #2e7d32;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+header nav a {
+  color: white;
+  margin: 0 15px;
+  text-decoration: none;
+}
+
+.form-container {
+  width: 400px;
+  margin: 40px auto;
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.form-container input, textarea, button {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+button {
+  background: #43a047;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #2e7d32;
+}
+
+.crop-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.crop-card {
+  background: white;
+  border-radius: 10px;
+  width: 250px;
+  padding: 15px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+  text-align: center;
+}
+
+.crop-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.delete-btn {
+  display: inline-block;
+  margin-top: 10px;
+  color: white;
+  background: #c62828;
+  padding: 6px 12px;
+  border-radius: 5px;
+  text-decoration: none;
+}
+

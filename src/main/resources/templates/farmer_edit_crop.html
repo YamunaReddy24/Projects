@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Crop | AgriLink</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<header>
+    <h1>✏️ Edit Crop</h1>
+</header>
+
+<div class="form-container">
+    <form th:action="@{'/farmer/edit-crop/' + ${crop.id}}" method="post" enctype="multipart/form-data">
+        <label>Crop Name:</label>
+        <input type="text" name="cropName" th:value="${crop.cropName}" required>
+
+        <label>Price (₹):</label>
+        <input type="number" name="price" step="0.01" th:value="${crop.price}" required>
+
+        <label>Quantity (kg):</label>
+        <input type="number" name="quantity" th:value="${crop.quantity}" required>
+
+        <label>Description:</label>
+        <textarea name="description" rows="3" th:text="${crop.description}"></textarea>
+
+        <label>Current Image:</label>
+        <img th:src="@{${crop.imageUrl}}" alt="Current Image" style="width:100%; height:150px; object-fit:cover; border-radius:10px;">
+
+        <label>Upload New Image (optional):</label>
+        <input type="file" name="imageFile" accept="image/*">
+
+        <button type="submit">Update Crop</button>
+    </form>
+
+    <div style="text-align:center; margin-top:10px;">
+        <a href="/farmer/view-crops" class="btn" style="background:#2e7d32; color:white;">Back to My Crops</a>
+    </div>
+</div>
+</body>
+</html>

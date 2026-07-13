@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Expert Dashboard | AgriLink</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        .dashboard-container { width: 90%; max-width: 1100px; margin: 20px auto; }
+        .hero-banner { position: relative; width: 100vw; height: 45vh; background: url('/images/img4.jpg') center/cover no-repeat; }
+        .hero-overlay { position: absolute; inset: 0; background: linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.25)); }
+        .hero-content { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); text-align: center; color: #fff; padding: 0 12px; }
+        .section-title { color: #fff; margin-bottom: 8px; }
+        .section-subtitle { color: #e8f5e9; }
+        .query-card { background: #fff; border-radius: 12px; padding: 18px; margin-bottom: 16px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .query-card h4 { margin: 0 0 8px; color: #2e7d32; }
+        .query-card p { margin: 6px 0; color: #555; }
+        .status-pending { color: #e65100; font-weight: 600; }
+        .status-answered { color: #2e7d32; font-weight: 600; }
+        .btn { display: inline-block; padding: 12px 26px; border-radius: 28px; color: #fff; text-decoration: none; font-weight: 600; }
+        .btn.primary { background: #43a047; }
+        .btn.secondary { background: #2e7d32; }
+    </style>
+</head>
+<body>
+<header>
+    <h1>👨‍🌾 Expert Dashboard</h1>
+    <nav>
+        <a href="/expert/dashboard">Dashboard</a>
+        <a href="/expert/logout">Logout</a>
+    </nav>
+</header>
+
+    <div class="hero-banner">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h2 class="section-title">Welcome, <span th:text="${expert.name}">Expert</span>!</h2>
+            <p class="section-subtitle">Answer farmer questions and help the community.</p>
+        </div>
+    </div>
+
+<div class="dashboard-container">
+    <h3 style="color: #2e7d32; margin-bottom: 16px;">Pending Queries</h3>
+    <div th:if="${pendingQueries != null and !pendingQueries.isEmpty()}">
+        <div class="query-card" th:each="query : ${pendingQueries}">
+            <h4 th:text="${query.subject}">Subject</h4>
+            <p><strong>Farmer:</strong> <span th:text="${query.farmer.name}">Farmer Name</span></p>
+            <p th:text="${query.question}">Question...</p>
+            <p><strong>Status:</strong> <span class="status-pending" th:text="${query.status}">PENDING</span></p>
+            <a th:href="@{/expert/reply/{id}(id=${query.id})}" class="btn primary">Reply</a>
+        </div>
+    </div>
+    <div th:if="${pendingQueries == null or pendingQueries.isEmpty()}" style="background: #fff; padding: 20px; border-radius: 12px; text-align: center;">
+        <p style="color: #666; font-size: 18px;">No pending queries at the moment!</p>
+    </div>
+</div>
+</body>
+</html>

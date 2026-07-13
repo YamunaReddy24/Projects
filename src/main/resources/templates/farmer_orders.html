@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Farmer Orders</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+</head>
+<body style="background-color: #eaf7ea;">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">🌱 AgriLink</a>
+            <div class="d-flex gap-2">
+                <a href="/farmer/dashboard" class="btn btn-light">Dashboard</a>
+                <a href="/farmer/crops" class="btn btn-light">My Crops</a>
+                <a href="/farmer/orders" class="btn btn-light">Incoming Orders</a>
+                <a href="/farmer/logout" class="btn btn-outline-light">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h2 class="text-center text-success mb-4">📦 Incoming Orders</h2>
+
+        <div th:if="${orders == null or #lists.isEmpty(orders)}" class="text-center alert alert-info">
+            No incoming orders yet!
+        </div>
+
+        <table th:if="${orders != null and not #lists.isEmpty(orders)}" class="table table-bordered table-striped">
+            <thead class="table-success">
+                <tr>
+                    <th>Order ID</th>
+                    <th>Buyer Name</th>
+                    <th>Crop Name</th>
+                    <th>Quantity</th>
+                    <th>Total Price</th>
+                    <th>Order Date</th>
+                    <th>Status</th>
+                    <th>Update Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="order : ${orders}">
+                    <td th:text="${order.orderId}"></td>
+                    <td th:text="${order.buyer != null ? order.buyer.name : 'N/A'}"></td>
+                    <td th:text="${order.crop != null ? order.crop.cropName : 'N/A'}"></td>
+                    <td th:text="${order.quantity}"></td>
+                    <td th:text="'₹' + ${order.totalPrice}"></td>
+                    <td th:text="${order.orderDate != null ? #temporals.format(order.orderDate, 'dd-MM-yyyy HH:mm') : 'N/A'}"></td>
+                    <td>
+                        <span class="badge" th:classappend="${order.status != null ? 
+                            (order.status.name() == 'ORDER_PLACED' ? 'bg-secondary' : 
+                             order.status.name() == 'CONFIRMED' ? 'bg-info' : 
+                             order.status.name() == 'SHIPPED' ? 'bg-warning' : 'bg-success') : 'bg-secondary'}"
+                              th:text="${order.status != null ? order.status.name().replace('_', ' ') : 'N/A'}"></span>
+                    </td>
+                    <td>
+                        <form th:action="@{/farmer/orders/update-status/{id}(id=${order.id})}" method="post">
+                            <select name="status" class="form-select form-select-sm" onchange="this.form.submit()">
+                                <option th:each="status : ${statuses}" 
+                                        th:value="${status}" 
+                                        th:text="${status.name().replace('_', ' ')}"
+                                        th:selected="${order.status != null and status == order.status}"></option>
+                            </select>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="text-center mt-3">
+            <a href="/farmer/dashboard" class="btn btn-success">Back to Dashboard</a>
+        </div>
+    </div>
+</body>
+</html>

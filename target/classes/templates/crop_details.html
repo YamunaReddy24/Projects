@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Crop Details</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="bg-light">
+  <div class="container mt-5">
+    <div class="card shadow mx-auto" style="max-width:500px;">
+      <img th:src="@{${crop.imagePath}}" class="card-img-top" alt="Crop Image">
+      <div class="card-body text-center">
+        <h4 th:text="${crop.name}"></h4>
+        <p>💰 Price: ₹<span th:text="${crop.price}"></span></p>
+        <p>📦 Quantity: <span th:text="${crop.quantity}"></span> kg</p>
+        <p>📍 Location: <span th:text="${crop.location}"></span></p>
+
+        <a href="#" class="btn btn-success">🛒 Request to Buy</a>
+        <a href="/buyer/view-crops" class="btn btn-secondary mt-2">⬅️ Back to Crops</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

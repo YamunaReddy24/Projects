@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Farmer Registration | AgriLink</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f6fff8;
+      color: #333;
+      text-align: center;
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .form-container {
+      width: 400px;
+      padding: 35px;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 15px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    }
+
+    h2 {
+      color: #2e7d32;
+      margin-bottom: 15px;
+      font-size: 24px;
+    }
+
+    input, select {
+      width: 90%;
+      padding: 12px;
+      margin: 12px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(135deg, #2e7d32, #1b5e20);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 600;
+      transition: transform 0.2s;
+    }
+
+    button:hover {
+      background: linear-gradient(135deg, #1b5e20, #2e7d32);
+      transform: scale(1.02);
+    }
+
+    .login-link {
+      margin-top: 18px;
+      display: block;
+      font-size: 15px;
+      color: #2e7d32;
+    }
+
+    .login-link a {
+      color: #2e7d32;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .login-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>👩‍🌾 Farmer Registration</h2>
+    <form th:action="@{/farmer/register}" method="post" th:object="${farmer}">
+      <input type="text" th:field="*{name}" placeholder="Full Name" required>
+      <input type="email" th:field="*{email}" placeholder="Email" required>
+      <input type="password" th:field="*{password}" placeholder="Password" required>
+      <input type="text" th:field="*{phone}" placeholder="Phone Number" required>
+      <input type="text" th:field="*{location}" placeholder="Location" required>
+      <button type="submit">Register</button>
+    </form>
+
+    <div class="login-link">
+      Already registered? <a th:href="@{/farmer/login}">Login here</a>
+    </div>
+  </div>
+</body>
+</html>

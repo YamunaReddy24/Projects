@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Crop | AgriLink</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        body {
+            background: url('/images/background8.jpg') center/cover no-repeat fixed;
+            margin: 0;
+            min-height: 100vh;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>🌾 Add New Crop</h1>
+</header>
+
+<div class="form-container">
+    <form action="/farmer/add-crop" method="post" enctype="multipart/form-data">
+        <label>Crop Name:</label>
+        <input type="text" name="cropName" required>
+
+        <label>Price (₹):</label>
+        <input type="number" name="price" step="0.01" required>
+
+        <label>Quantity (kg):</label>
+        <input type="number" name="quantity" required>
+
+        <label>Description:</label>
+        <textarea name="description" rows="3"></textarea>
+
+        <label>Upload Image:</label>
+        <input type="file" name="imageFile" accept="image/*" required>
+        
+        <!-- Submit button -->
+  <div class="text-center mt-4">
+  <button type="submit" class="btn btn-success">Add Crop</button>
+  </div>
+
+<!-- Back to Dashboard button -->
+<div class="text-center mt-4">
+  <a href="/farmer/dashboard"
+     class="btn btn-secondary"
+    style="background-color:#4CAF50; color:white; border:none; padding:10px 25px; border-radius:25px; text-decoration:none;">
+ 
+    ⬅️ Back to Dashboard 
+      </a>
+    </div>
+  </form>
+</div>
+</body>
+</html>
+        
+
+  

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Available Crops</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="bg-light">
+  <div class="container mt-5">
+    <h2 class="text-center mb-4">🌾 Available Crops</h2>
+    <div class="row">
+      <div class="col-md-4 mb-4" th:each="crop : ${crops}">
+        <div class="card shadow">
+          <img th:src="@{${crop.imagePath}}" class="card-img-top" alt="Crop Image">
+          <div class="card-body text-center">
+            <h5 th:text="${crop.name}"></h5>
+            <p>💰 Price: ₹<span th:text="${crop.price}"></span></p>
+            <p>📦 Quantity: <span th:text="${crop.quantity}"></span> kg</p>
+            <p>📍 Location: <span th:text="${crop.location}"></span></p>
+            <a th:href="@{'/buyer/crop-details/' + ${crop.id}}" class="btn btn-primary">View Details</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Back to Dashboard -->
+    <div class="text-center mt-4">
+      <a href="/buyer/dashboard" class="btn btn-secondary">⬅️ Back to Dashboard</a>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - AgriLink</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+</head>
+<body style="background-color: #eaf7ea;">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">🌱 AgriLink</a>
+            <div class="d-flex gap-2">
+                <a href="/buyer/dashboard" class="btn btn-light">Dashboard</a>
+                <a href="/buyer/available-crops" class="btn btn-light">Available Crops</a>
+                <a href="/buyer/my-orders" class="btn btn-light">My Orders</a>
+                <a href="/buyer/logout" class="btn btn-outline-light">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5 mb-5">
+        <h2 class="text-center mb-4 text-success">Checkout</h2>
+
+        <div th:if="${error}" class="alert alert-danger" role="alert">
+            <span th:text="${error}"></span>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <!-- Crop Information -->
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-header bg-success text-white">
+                        <h5 class="mb-0">Crop Information</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <img th:src="${crop.imageUrl}" class="img-fluid rounded" alt="Crop">
+                            </div>
+                            <div class="col-md-8">
+                                <h4 th:text="${crop.cropName}"></h4>
+                                <p class="text-muted" th:text="${crop.description}"></p>
+                                <p><strong>Price:</strong> ₹<span th:text="${crop.price}"></span> / kg</p>
+                                <p><strong>Available Quantity:</strong> <span th:text="${crop.quantity}"></span> kg</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <form th:action="@{/buyer/place-order/{cropId}(cropId=${crop.id})}" method="post">
+                    <!-- Quantity and Total -->
+                    <div class="card mb-4 shadow-sm">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0">Quantity & Total</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label for="quantity" class="form-label">Quantity to Buy (kg)</label>
+                                <input type="number" class="form-control" id="quantity" name="quantity"
+                                       th:value="${quantity}" min="1" th:max="${crop.quantity}" required oninput="calculateTotal()">
+                            </div>
+                            <h5>Total Amount: ₹<span id="totalAmount">0</span></h5>
+                        </div>
+                    </div>
+
+                    <!-- Delivery Address -->
+                    <div class="card mb-4 shadow-sm">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0">Delivery Address</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="fullName" class="form-label">Full Name</label>
+                                    <input type="text" class="form-control" id="fullName" name="fullName" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="mobileNumber" class="form-label">Mobile Number</label>
+                                    <input type="text" class="form-control" id="mobileNumber" name="mobileNumber" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="houseNoStreet" class="form-label">House No / Street</label>
+                                <input type="text" class="form-control" id="houseNoStreet" name="houseNoStreet" required>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="villageCity" class="form-label">Village / City</label>
+                                    <input type="text" class="form-control" id="villageCity" name="villageCity" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="district" class="form-label">District</label>
+                                    <input type="text" class="form-control" id="district" name="district" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="state" class="form-label">State</label>
+                                    <input type="text" class="form-control" id="state" name="state" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="pincode" class="form-label">Pincode</label>
+                                    <input type="text" class="form-control" id="pincode" name="pincode" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Payment Method -->
+                    <div class="card mb-4 shadow-sm">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0">Payment Method</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="radio" name="paymentMethod" id="cod"
+                                       value="Cash on Delivery" checked>
+                                <label class="form-check-label" for="cod">
+                                    Cash on Delivery
+                                </label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="radio" name="paymentMethod" id="upi"
+                                       value="UPI (Demo)">
+                                <label class="form-check-label" for="upi">
+                                    UPI (Demo)
+                                </label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="radio" name="paymentMethod" id="card"
+                                       value="Debit/Credit Card (Demo)">
+                                <label class="form-check-label" for="card">
+                                    Debit/Credit Card (Demo)
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="paymentMethod" id="netbanking"
+                                       value="Net Banking (Demo)">
+                                <label class="form-check-label" for="netbanking">
+                                    Net Banking (Demo)
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-success btn-lg">
+                            <i class="bi bi-check-circle"></i> Place Order
+                        </button>
+                        <a href="/buyer/available-crops" class="btn btn-outline-secondary">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script th:inline="javascript">
+        const pricePerKg = /*[[${crop.price}]]*/ 0;
+
+        function calculateTotal() {
+            const quantity = document.getElementById('quantity').value || 0;
+            const total = quantity * pricePerKg;
+            document.getElementById('totalAmount').textContent = total.toFixed(2);
+        }
+
+        // Initialize total on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            calculateTotal();
+        });
+    </script>
+</body>
+</html>

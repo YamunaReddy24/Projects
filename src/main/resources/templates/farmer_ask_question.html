@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ask Question | AgriLink</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        .container { width: 90%; max-width: 900px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        input, textarea { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ccc; border-radius: 8px; font-size: 16px; }
+        textarea { min-height: 150px; }
+        .btn { display: inline-block; padding: 12px 26px; border-radius: 28px; color: #fff; text-decoration: none; font-weight: 600; }
+        .btn.primary { background: #43a047; }
+    </style>
+</head>
+<body>
+<header>
+    <h1>👩‍🌾 Ask a Question</h1>
+    <nav>
+        <a href="/farmer/dashboard">Dashboard</a>
+        <a href="/farmer/logout">Logout</a>
+    </nav>
+</header>
+
+<div class="container">
+    <h3 style="color: #2e7d32; margin-bottom: 16px;">Ask the Agricultural Experts</h3>
+    <form th:action="@{/farmer/ask-question}" method="post">
+        <input type="text" name="subject" placeholder="Question Subject" required>
+        <textarea name="question" placeholder="Write your question in detail..." required></textarea>
+        <button type="submit" class="btn primary">Submit Question</button>
+    </form>
+</div>
+</body>
+</html>

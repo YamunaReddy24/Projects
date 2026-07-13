@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Farmer Dashboard | AgriLink</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        .dashboard-container { width: 90%; max-width: 1100px; margin: 20px auto; }
+        .hero-banner { position: relative; width: 100vw; height: 45vh; background: url('/images/img4.jpg') center/cover no-repeat; }
+        .hero-overlay { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.4); }
+        .hero-content { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); text-align: center; color: #fff; padding: 0 12px; }
+        .section-title { color: #fff; margin-bottom: 8px; font-weight: bold; font-size: 1.9em !important; }
+        .section-subtitle { color: #fff; font-weight: bold; font-size: 1.1em !important; }
+        .actions { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 22px; justify-items: center; align-items: start; margin-top: 22px; }
+        .action-card { width: 100%; max-width: 320px; background: #fff; border-radius: 12px; padding: 18px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .action-card h3 { margin: 8px 0; color: #2e7d32; }
+        .action-card p { color: #666; margin-bottom: 16px; }
+        .btn { display: inline-block; padding: 12px 26px; border-radius: 28px; color: #fff; text-decoration: none; font-weight: 600; }
+        .btn.primary { background: #43a047; }
+        .btn.secondary { background: #2e7d32; }
+        .action-card .btn { width: 100%; max-width: 180px; margin: 0 auto; }
+        .query-card { background: #fff; border-radius: 12px; padding: 18px; margin-bottom: 16px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .query-card h4 { margin: 0 0 8px; color: #2e7d32; }
+        .query-card p { margin: 6px 0; color: #555; }
+        .status-pending { color: #e65100; font-weight: 600; }
+        .status-answered { color: #2e7d32; font-weight: 600; }
+    </style>
+</head>
+<body>
+<header>
+    <h1>👩‍🌾 Farmer Dashboard</h1>
+    </header>
+
+    <div class="hero-banner" style="background: url('/images/img4.jpg') center/cover no-repeat !important;">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h2 class="section-title">Welcome to AgriLink Farmer Portal</h2>
+            <p class="section-subtitle">Manage your crops, update prices, and get expert advice.</p>
+        </div>
+    </div>
+
+<div class="dashboard-container">
+
+    <div class="actions">
+        <div class="action-card">
+            <h3>Add New Crop</h3>
+            <p>Create a listing with price, quantity, and an image.</p>
+            <a href="/farmer/add-crop" class="btn primary">Add Crop</a>
+        </div>
+        <div class="action-card">
+            <h3>View My Crops</h3>
+            <p>Review, edit, or delete your uploaded crops.</p>
+            <a href="/farmer/view-crops" class="btn secondary">View Crops</a>
+        </div>
+        <div class="action-card">
+            <h3>Incoming Orders</h3>
+            <p>View and manage orders for your crops.</p>
+            <a href="/farmer/orders" class="btn primary">View Orders</a>
+        </div>
+        <div class="action-card">
+            <h3>Ask Expert</h3>
+            <p>Get advice from agricultural experts.</p>
+            <a href="/farmer/ask-question" class="btn secondary">Ask Question</a>
+        </div>
+        <div class="action-card">
+            <h3>Query History</h3>
+            <p>View your questions and expert responses.</p>
+            <a href="/farmer/query-history" class="btn primary">View History</a>
+        </div>
+        <div class="action-card">
+            <h3>Logout</h3>
+            <p>Exit the portal and return to the homepage.</p>
+            <a href="/farmer/logout" class="btn secondary">Logout</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

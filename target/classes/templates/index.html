@@ -1,0 +1,165 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgriLink | Connecting Farmers and Buyers</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <style>
+    #home {
+      min-height: 100vh !important;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 🌿 Navbar -->
+  <header class="navbar">
+    <div style="display:flex; flex-direction:column; gap:4px;">
+      <div class="logo">🌾 AgriLink</div>
+      <div style="font-size:0.85em; color:#fff; opacity:0.9;">Smart Digital Agricultural Marketplace</div>
+    </div>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#crops">Browse Crops</a>
+      <a href="#join">Join</a>
+      <a href="#login">Login</a>
+    </nav>
+  </header>
+
+  <!-- 🏡 Home Section -->
+  <section id="home" class="section hero" style="background-image:url('/images/background11.jpg') !important; background-size:cover; background-position:center; background-repeat:no-repeat; background-attachment:fixed;">
+    <div class="overlay overlay-light"></div>
+    <!-- Weather Widget - Top Right -->
+    <div id="weather-widget" style="position: absolute; top: 80px; right: 20px; width: 220px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.3); background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); padding: 12px; color: white; z-index: 100;">
+      <div style="font-size: 0.95rem; font-weight: 600; color: #ffffff; margin-bottom: 6px; display: flex; align-items: center; gap: 5px;">
+        🌤 Weather
+      </div>
+      <div id="weather-city" style="font-size: 0.85rem; font-weight: 500; color: #ffffff; margin-bottom: 8px; display: flex; align-items: center; gap: 4px;">
+        📍 Bengaluru
+      </div>
+      <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+        <div id="weather-icon" style="font-size: 2.2rem;">🌤</div>
+        <div id="weather-temp" style="font-size: 1.6rem; font-weight: 700; color: #ffffff;">28°C</div>
+      </div>
+      <div id="weather-condition" style="font-size: 0.85rem; color: #f0f0f0; margin-bottom: 6px; text-transform: capitalize;">Clear Sky</div>
+      <div style="display: flex; flex-direction: column; gap: 4px; margin-bottom: 6px;">
+        <div id="weather-humidity" style="font-size: 0.75rem; color: #e0e0e0; display: flex; align-items: center; gap: 5px;">💧 Humidity: 65%</div>
+        <div id="weather-wind" style="font-size: 0.75rem; color: #e0e0e0; display: flex; align-items: center; gap: 5px;">🌬 Wind Speed: 13 km/h</div>
+      </div>
+      <div id="weather-updated" style="font-size: 0.65rem; color: #d0d0d0; display: flex; align-items: center; gap: 4px;">🕒 Updated: Just now</div>
+    </div>
+    <div class="content" style="color:#ffffff; position: relative; z-index: 2;">
+      <h1>"Connecting Farmers and Buyers"</h1>
+      <p style="font-weight:bold; color:#ffffff !important;">Empowering agriculture through trust and technology.</p>
+      <a href="#join" class="btn primary">Get Started</a>
+    </div>
+  </section>
+
+  <!-- 🌱 Browse Crops Section -->
+  <section id="crops" class="section crops" style="background-image:url('/images/background3.jpg') !important; background-size:cover; background-position:center; background-repeat:no-repeat; background-attachment:fixed;">
+    <div class="content">
+      <h2>🌱 Browse Crops</h2>
+      <p style="font-weight:bold; font-size:1.04em;">Discover fresh produce directly from farmers — transparent, fair, and sustainable.</p>
+      <a href="/browse" class="btn secondary">Explore Now</a>
+    </div>
+  </section>
+
+  <!-- 🤝 Join Section -->
+  <section id="join" class="section join" style="background-image:url('/images/background6.jpg') !important; background-size:cover; background-position:center; background-repeat:no-repeat; background-attachment:fixed;">
+    <div class="content">
+        <h2>🤝 Join the AgriLink Community</h2>
+        <p>Are you a Farmer, Buyer, or Agricultural Expert? Join now to start trading, learning, and growing together!</p>
+        <div class="portal-buttons" style="flex-wrap: wrap;">
+            <a href="/farmer/register" class="btn farmer">👩‍🌾 Farmer Portal</a>
+            <a href="/buyer/register" class="btn buyer">🛒 Buyer Portal</a>
+            <a href="/expert/register" class="btn expert">👨‍🌾 Expert Portal</a>
+            <a href="/market/dashboard" class="btn buyer">📊 Market Price Analytics</a>
+        </div>
+    </div>
+</section>
+
+ 
+  <!-- 🌾 Footer -->
+  <footer>
+    © 2025 <b>AgriLink</b> | Growing Together 🌿
+  </footer>
+
+  <script>
+    // Weather icons mapping
+    const weatherIcons = {
+      '01d': '☀️', '01n': '🌙',
+      '02d': '⛅', '02n': '☁️',
+      '03d': '☁️', '03n': '☁️',
+      '04d': '☁️', '04n': '☁️',
+      '09d': '🌧️', '09n': '🌧️',
+      '10d': '🌦️', '10n': '🌧️',
+      '11d': '⛈️', '11n': '⛈️',
+      '13d': '❄️', '13n': '❄️',
+      '50d': '🌫️', '50n': '🌫️'
+    };
+
+    // Fetch and update weather
+    function updateWeather() {
+      console.log('Fetching weather data...');
+      fetch('/api/weather?_t=' + Date.now())
+        .then(response => response.json())
+        .then(data => {
+          console.log('Weather data received:', data);
+          
+          // Update city
+          const city = data.cityName || data.name || 'Bengaluru';
+          document.getElementById('weather-city').innerHTML = '📍 ' + city;
+          
+          // Update temperature
+          let temp = 28;
+          if (data.main) {
+            if (typeof data.main.temperature === 'number') temp = data.main.temperature;
+            else if (typeof data.main.temp === 'number') temp = data.main.temp;
+          }
+          document.getElementById('weather-temp').textContent = Math.round(temp) + '°C';
+          
+          // Update weather icon
+          const weatherList = data.weather || [];
+          const weatherData = weatherList[0] || {};
+          const iconCode = weatherData.icon || '01d';
+          document.getElementById('weather-icon').textContent = weatherIcons[iconCode] || '🌤️';
+          
+          // Update weather condition
+          const weatherCondition = weatherData.description || weatherData.main || 'Clear Sky';
+          document.getElementById('weather-condition').textContent = weatherCondition;
+          
+          // Update humidity
+          let humidity = 65;
+          if (data.main && data.main.humidity) humidity = data.main.humidity;
+          document.getElementById('weather-humidity').innerHTML = '💧 Humidity: ' + humidity + '%';
+          
+          // Update wind speed
+          let windSpeed = 3.5;
+          if (data.wind && data.wind.speed) windSpeed = data.wind.speed;
+          const windSpeedKmh = Math.round(windSpeed * 3.6);
+          document.getElementById('weather-wind').innerHTML = '🌬 Wind Speed: ' + windSpeedKmh + ' km/h';
+          
+          // Update time
+          const now = new Date();
+          const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+          document.getElementById('weather-updated').innerHTML = '🕒 Updated: ' + timeString;
+        })
+        .catch(error => {
+          console.error('Error fetching weather:', error);
+          // Update time even on error
+          const now = new Date();
+          const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+          document.getElementById('weather-updated').innerHTML = '🕒 Updated: ' + timeString;
+        });
+    }
+
+    // Initial load
+    updateWeather();
+
+    // Auto refresh every 10 minutes
+    setInterval(updateWeather, 600000);
+  </script>
+</body>
+</html>

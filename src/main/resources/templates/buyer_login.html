@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buyer Login | AgriLink</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: url('/images/tractor.jpg') center/cover no-repeat fixed;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .login-container {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 15px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+      padding: 40px;
+      width: 400px;
+      text-align: center;
+    }
+    h2 { color: #2e7d32; margin-bottom: 20px; font-size: 24px; }
+    input {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #a5d6a7;
+      margin-bottom: 15px;
+      font-size: 15px;
+    }
+    button {
+      width: 100%;
+      background: linear-gradient(135deg, #43a047, #2e7d32);
+      color: #fff;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1em;
+      font-weight: 600;
+      transition: transform 0.2s;
+    }
+    button:hover { transform: scale(1.02); }
+    p { margin-top: 12px; font-size: 15px; }
+    a { color: #2e7d32; font-weight: bold; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h2>Buyer Login</h2>
+
+    <form action="/buyer/login" method="post">
+      <input type="email" name="email" placeholder="Email Address" required>
+      <input type="password" name="password" placeholder="Password" required>
+      <button type="submit">Login</button>
+      <p>Don’t have an account? <a href="/buyer/register">Register here</a></p>
+    </form>
+
+    <div style="color:red;">
+      <p th:if="${error}" th:text="${error}"></p>
+    </div>
+
+    <div style="color:green;">
+      <p th:if="${success}" th:text="'Registration successful! Please login.'"></p>
+    </div>
+  </div>
+</body>
+</html>

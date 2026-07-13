@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Query Details | AgriLink</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        .container { width: 90%; max-width: 900px; margin: 40px auto; }
+        .query-box { background: #fff; border-radius: 12px; padding: 18px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .response-box { background: #f6fff8; border-radius: 12px; padding: 18px; margin-bottom: 12px; border-left: 4px solid #2e7d32; }
+        .btn { display: inline-block; padding: 12px 26px; border-radius: 28px; color: #fff; text-decoration: none; font-weight: 600; }
+        .btn.secondary { background: #2e7d32; }
+    </style>
+</head>
+<body>
+<header>
+    <h1>👩‍🌾 Query Details</h1>
+    <nav>
+        <a href="/farmer/query-history">Query History</a>
+        <a href="/farmer/logout">Logout</a>
+    </nav>
+</header>
+
+<div class="container">
+    <div class="query-box">
+        <h3 style="color: #2e7d32; margin-bottom: 8px;" th:text="${query.subject}">Subject</h3>
+        <p th:text="${query.question}">Question...</p>
+        <p><strong>Status:</strong> <span th:text="${query.status}">STATUS</span></p>
+    </div>
+
+    <h3 style="color: #2e7d32; margin-bottom: 16px;">Expert Responses</h3>
+    <div th:if="${responses != null and !responses.isEmpty()}">
+        <div class="response-box" th:each="response : ${responses}">
+            <h4 style="color: #2e7d32; margin-bottom: 8px;">From: <span th:text="${response.expert.name}">Expert Name</span></h4>
+            <p th:text="${response.response}">Response...</p>
+            <p style="color: #666; font-size: 14px;"><strong>Date:</strong> <span th:text="${#temporals.format(response.createdAt, 'dd-MM-yyyy HH:mm')}">Date</span></p>
+        </div>
+    </div>
+    <div th:if="${responses == null or responses.isEmpty()}" style="background: #fff; padding: 20px; border-radius: 12px; text-align: center;">
+        <p style="color: #666; font-size: 18px;">No responses yet! Please check back later.</p>
+    </div>
+
+    <a href="/farmer/query-history" class="btn secondary">Back to History</a>
+</div>
+</body>
+</html>

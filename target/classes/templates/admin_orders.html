@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Order Monitoring</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+</head>
+<body style="background-color: #eaf7ea;">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">🌱 AgriLink</a>
+            <div class="d-flex gap-2">
+                <a href="/admin/dashboard" class="btn btn-light">Dashboard</a>
+                <a href="/admin/orders" class="btn btn-light">Order Monitoring</a>
+                <a href="/" class="btn btn-outline-light">Home</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h2 class="text-center text-success mb-4">📊 Admin Order Monitoring</h2>
+
+        <table class="table table-bordered table-striped">
+            <thead class="table-success">
+                <tr>
+                    <th>Order ID</th>
+                    <th>Buyer Name</th>
+                    <th>Crop Name</th>
+                    <th>Farmer ID</th>
+                    <th>Quantity</th>
+                    <th>Total Price</th>
+                    <th>Order Date</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="order : ${orders}">
+                    <td th:text="${order.orderId}"></td>
+                    <td th:text="${order.buyer.name}"></td>
+                    <td th:text="${order.crop.cropName}"></td>
+                    <td th:text="${order.crop.farmerId}"></td>
+                    <td th:text="${order.quantity}"></td>
+                    <td th:text="'₹' + ${order.totalPrice}"></td>
+                    <td th:text="${#temporals.format(order.orderDate, 'dd-MM-yyyy HH:mm')}"></td>
+                    <td>
+                        <span class="badge" th:classappend="${order.status.name() == 'ORDER_PLACED' ? 'bg-secondary' : 
+                                                           order.status.name() == 'CONFIRMED' ? 'bg-info' : 
+                                                           order.status.name() == 'SHIPPED' ? 'bg-warning' : 'bg-success'}"
+                              th:text="${order.status.name().replace('_', ' ')}"></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

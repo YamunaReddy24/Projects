@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>My Crops | AgriLink</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f1f8e9;
+      padding: 20px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #2e7d32;
+      margin-bottom: 25px;
+    }
+
+    table {
+      width: 90%;
+      margin: auto;
+      border-collapse: collapse;
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    th, td {
+      padding: 12px 15px;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #43a047;
+      color: white;
+    }
+
+    tr:hover {
+      background-color: #f1f8e9;
+    }
+
+    img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      background: #43a047;
+      color: white;
+      border-radius: 25px;
+      text-decoration: none;
+    }
+
+    .back-btn:hover {
+      background: #2e7d32;
+    }
+  </style>
+</head>
+<body>
+  <h2>🌾 My Uploaded Crops</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Image</th>
+        <th>Crop Name</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Description</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+    <tr th:each="crop : ${crops}">
+    <td><img th:src="@{${crop.imageUrl}}" th:alt="'Image of ' + ${crop.cropName}" width="100" onerror="this.src='https://via.placeholder.com/80'"/></td>
+    <td th:text="${crop.cropName}"></td>
+    <td>₹<span th:text="${crop.price}"></span></td>
+    <td><span th:text="${crop.quantity}"></span> kg</td>
+    <td th:text="${crop.description}"></td>
+    <td>
+      <a th:href="@{'/farmer/edit-crop/' + ${crop.id}}" class="btn" style="background:#1976d2; color:#fff; padding:6px 12px; border-radius:6px; text-decoration:none;">Edit</a>
+      <form th:action="@{'/farmer/delete-crop/' + ${crop.id}}" method="post" style="display:inline-block; margin-left:8px;">
+        <button type="submit" class="btn" style="background:#c62828; color:#fff; padding:6px 12px; border-radius:6px;">Delete</button>
+      </form>
+    </td>
+   </tr>
+    
+  </tbody>
+    
+  </table>
+  
+<div class="text-center mt-4">
+  <a href="/farmer/add-crop" class="btn btn-success">
+    ➕ Add Another Crop
+  </a>
+</div>
+
+<!-- Back to Dashboard button -->
+<div class="text-center mt-3">
+  <a href="/farmer/dashboard" class="btn" style="background-color:#4CAF50; color:white; border:none; padding:10px 20px; border-radius:20px; text-decoration:none;">
+    ⬅️ Back to Dashboard
+  </a>
+</div>
+  
+  <div style="text-align:center;">
+    <a href="/farmer/add-crop" class="back-btn">➕ Add Another Crop</a>
+  </div>
+</body>
+</html>

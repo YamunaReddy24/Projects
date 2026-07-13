@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Query History | AgriLink</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        .dashboard-container { width: 90%; max-width: 1100px; margin: 20px auto; }
+        .query-card { background: #fff; border-radius: 12px; padding: 18px; margin-bottom: 16px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .query-card h4 { margin: 0 0 8px; color: #2e7d32; }
+        .query-card p { margin: 6px 0; color: #555; }
+        .status-pending { color: #e65100; font-weight: 600; }
+        .status-answered { color: #2e7d32; font-weight: 600; }
+        .btn { display: inline-block; padding: 12px 26px; border-radius: 28px; color: #fff; text-decoration: none; font-weight: 600; }
+        .btn.primary { background: #43a047; }
+    </style>
+</head>
+<body>
+<header>
+    <h1>👩‍🌾 Query History</h1>
+    <nav>
+        <a href="/farmer/dashboard">Dashboard</a>
+        <a href="/farmer/logout">Logout</a>
+    </nav>
+</header>
+
+<div class="dashboard-container">
+    <div th:if="${queries != null and !queries.isEmpty()}">
+        <div class="query-card" th:each="query : ${queries}">
+            <h4 th:text="${query.subject}">Subject</h4>
+            <p th:text="${query.question}">Question...</p>
+            <p><strong>Status:</strong> <span th:class="${query.status == 'PENDING' ? 'status-pending' : 'status-answered'}" th:text="${query.status}">STATUS</span></p>
+            <p><strong>Date:</strong> <span th:text="${#temporals.format(query.createdAt, 'dd-MM-yyyy HH:mm')}">Date</span></p>
+            <a th:href="@{/farmer/query-detail/{id}(id=${query.id})}" class="btn primary">View Details</a>
+        </div>
+    </div>
+    <div th:if="${queries == null or queries.isEmpty()}" style="background: #fff; padding: 20px; border-radius: 12px; text-align: center;">
+        <p style="color: #666; font-size: 18px;">You haven't asked any questions yet!</p>
+        <a href="/farmer/ask-question" class="btn primary">Ask a Question</a>
+    </div>
+</div>
+</body>
+</html>

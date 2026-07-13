@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reply to Query | AgriLink</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        .container { width: 90%; max-width: 900px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        textarea { width: 100%; min-height: 150px; padding: 12px; margin: 10px 0; border: 1px solid #ccc; border-radius: 8px; font-size: 16px; }
+        .btn { display: inline-block; padding: 12px 26px; border-radius: 28px; color: #fff; text-decoration: none; font-weight: 600; }
+        .btn.primary { background: #43a047; }
+        .btn.secondary { background: #2e7d32; }
+    </style>
+</head>
+<body>
+<header>
+    <h1>👨‍🌾 Reply to Query</h1>
+    <nav>
+        <a href="/expert/dashboard">Dashboard</a>
+        <a href="/expert/logout">Logout</a>
+    </nav>
+</header>
+
+<div class="container">
+    <h3 style="color: #2e7d32; margin-bottom: 16px;">Farmer's Question</h3>
+    <div style="background: #f6fff8; padding: 18px; border-radius: 8px; margin-bottom: 24px;">
+        <h4 th:text="${query.subject}">Subject</h4>
+        <p><strong>Farmer:</strong> <span th:text="${query.farmer.name}">Farmer Name</span></p>
+        <p th:text="${query.question}">Question...</p>
+    </div>
+    <h3 style="color: #2e7d32; margin-bottom: 16px;">Your Response</h3>
+    <form th:action="@{/expert/reply/{id}(id=${query.id})}" method="post">
+        <textarea name="response" placeholder="Write your expert advice here..." required></textarea>
+        <button type="submit" class="btn primary">Send Response</button>
+    </form>
+</div>
+</body>
+</html>
